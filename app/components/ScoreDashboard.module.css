@@ -1,0 +1,456 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ─── Overall Score Card ─── */
+.overallCard {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(24px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.overallCard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, var(--glow-1), transparent 60%);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.scoreCircle {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 12px var(--glow-1));
+}
+
+.scoreInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.scoreTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.gradeRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.gradeBadge {
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+}
+
+.gradeLabel {
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.fileName {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.fileName strong {
+    color: var(--text-primary);
+}
+
+/* ─── Section Title ─── */
+.sectionTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ─── Category Cards ─── */
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.categoryCard {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.categoryCard:hover {
+    border-color: var(--border-accent);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.06);
+}
+
+.categoryHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+    gap: 12px;
+}
+
+.categoryLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.categoryIcon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.categoryIcon.excellent {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--accent-green);
+}
+
+.categoryIcon.good {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-3);
+}
+
+.categoryIcon.average {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--accent-orange);
+}
+
+.categoryIcon.poor {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--accent-red);
+}
+
+.categoryName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.categoryWeight {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+}
+
+.categoryRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.categoryScore {
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+}
+
+.categoryScore.excellent {
+    color: var(--accent-green);
+}
+
+.categoryScore.good {
+    color: var(--accent-3);
+}
+
+.categoryScore.average {
+    color: var(--accent-orange);
+}
+
+.categoryScore.poor {
+    color: var(--accent-red);
+}
+
+.expandIcon {
+    color: var(--text-tertiary);
+    transition: color var(--transition-fast);
+}
+
+.categoryHeader:hover .expandIcon {
+    color: var(--text-secondary);
+}
+
+/* Progress bar */
+.progressTrack {
+    height: 3px;
+    background: rgba(139, 92, 246, 0.06);
+}
+
+.progressFill {
+    height: 100%;
+    transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.progressFill.excellent {
+    background: linear-gradient(90deg, #22c55e, #06b6d4);
+}
+
+.progressFill.good {
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+}
+
+.progressFill.average {
+    background: linear-gradient(90deg, #f59e0b, #ec4899);
+}
+
+.progressFill.poor {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+/* Expanded details */
+.details {
+    padding: 0 18px 18px;
+    overflow: hidden;
+}
+
+.detailContent {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.detailStat {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.detailStat strong {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+}
+
+.tagGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tagLabel {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: var(--font-mono);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sectionList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sectionItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.sectionFound {
+    color: var(--accent-green);
+}
+
+.sectionMissing {
+    color: var(--accent-red);
+}
+
+.tipsList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.tipItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--accent-orange);
+    padding: 10px 14px;
+    background: rgba(245, 158, 11, 0.05);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(245, 158, 11, 0.1);
+    line-height: 1.5;
+}
+
+.tipItem svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ─── Suggestions ─── */
+.suggestionsCard {
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-2xl);
+    backdrop-filter: blur(20px);
+}
+
+.suggestionsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.suggestionItem {
+    padding: 14px 16px;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all var(--transition-fast);
+}
+
+.suggestionItem:hover {
+    background: var(--bg-glass-strong);
+    border-color: var(--border-medium);
+}
+
+.suggestionHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.suggestionCategory {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+}
+
+.suggestionText {
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+    .overallCard {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px 18px;
+        gap: 18px;
+    }
+
+    .scoreCircle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .scoreInfo {
+        align-items: center;
+    }
+
+    .scoreTitle {
+        font-size: 1.1rem;
+    }
+
+    .gradeRow {
+        justify-content: center;
+    }
+
+    .categoryHeader {
+        padding: 14px;
+    }
+
+    .suggestionsCard {
+        padding: 18px;
+    }
+
+    .suggestionItem {
+        padding: 12px;
+    }
+
+    .details {
+        padding: 0 14px 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .overallCard {
+        padding: 18px 14px;
+    }
+
+    .scoreCircle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .scoreTitle {
+        font-size: 1rem;
+    }
+
+    .categoryHeader {
+        padding: 12px;
+    }
+
+    .categoryName {
+        font-size: 0.83rem;
+    }
+
+    .categoryScore {
+        font-size: 0.95rem;
+    }
+
+    .categoryIcon {
+        width: 32px;
+        height: 32px;
+    }
+}
